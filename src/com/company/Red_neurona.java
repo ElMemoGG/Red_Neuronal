@@ -25,6 +25,7 @@ public class Red_neurona {
 
         double[][] output = Helper.multiplicacion(weights2, hidden);
         output = Helper.mat_Sum(output, biasO);
+
         output = Helper.sigmoide(output);
         return output;
 
@@ -54,7 +55,7 @@ public class Red_neurona {
 
         //de aqui en adelante quien sabe que vergas hace esto y como se pueda hacer dinamico es un misterio
 
-        double[][] who_delta = Helper.multiplicacion(Helper.matrix_XT(hidden), gradiente);
+        double[][] who_delta = Helper.multiplicacion( gradiente, Helper.matrix_XT(hidden));
 
         weights2 = Helper.mat_Sum(weights2, who_delta);
         biasO = Helper.mat_Sum(biasO, gradiente );
@@ -65,7 +66,7 @@ public class Red_neurona {
         h_gradiente = Helper.multiplicacion(h_gradiente, hidden_errors );
         h_gradiente = Helper.multi(h_gradiente, alpha);
 
-        double[][] wih_delta = Helper.multiplicacion( Helper.matrix_XT(input_user), h_gradiente);
+        double[][] wih_delta = Helper.multiplicacion( h_gradiente, Helper.matrix_XT(input_user));
 
 
         weights1 = Helper.mat_Sum(weights1, wih_delta );
@@ -87,8 +88,8 @@ public class Red_neurona {
         double[][] result = new double[filas][columnas];
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                //result[i][j] =Math.random()*2-1;
-                result[i][j] = 1;
+                result[i][j] =Math.random()*2-1;
+                //result[i][j] = 1;
             }
         }
         return  result;

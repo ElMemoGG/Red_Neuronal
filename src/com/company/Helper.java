@@ -10,7 +10,7 @@ public class Helper {
             for(int j = 0; j<respuesta[0].length; j++)
             {
                 double sum=0;
-                for(int k = 0; k<respuesta[0].length; k++)
+                for(int k = 0; k<a[0].length; k++)
                 {
                     sum+=a[i][k]*b[k][j];
                 }
@@ -33,6 +33,7 @@ public class Helper {
         } else {
             return mat_A;
         }
+
     }
     public static double[][] sigmoide(double [][] neuron) {
         for(int i = 0; i < neuron.length; i++)
