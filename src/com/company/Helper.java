@@ -31,7 +31,7 @@ public class Helper {
             }
             return mat_sum;
         } else {
-            return null;
+            return mat_A;
         }
     }
     public static double[][] sigmoide(double [][] neuron) {
@@ -54,7 +54,7 @@ public class Helper {
             }
             return mat_rest;
         } else {
-            return null;
+            return mat_A;
         }
     }
 
@@ -79,6 +79,36 @@ public class Helper {
             }
         }
         return ans;
+
+    }
+
+    public static double [][] matrix_XT (double [][] matrix_X){
+        double [][] mat_XT = new double[matrix_X[0].length][matrix_X.length];
+        for (int i = 0; i < matrix_X.length; i++) {
+            for (int j = 0; j < matrix_X[0].length; j++){
+                mat_XT[j][i] = matrix_X[i][j];
+
+            }
+        }
+        return mat_XT;
+    }
+
+    public static void ImprimirMatriz(double[][] m){
+        for (int i = 0; i < m.length; i++) { //filas
+            for (int j = 0; j < m[i].length ; j++) { //columnas
+                System.out.print(m[i][j] + " ");
+
+            }
+            System.out.println("");
+        }
+    }
+
+    public static double[][] convertir_Array_Matrix(double[]x) {
+
+        double[][] result = new  double[x.length][1];
+        for(int i =0;i<x.length;i++)
+            result[i][0]=x[i];
+        return result;
 
     }
 

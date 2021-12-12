@@ -5,7 +5,7 @@ public class Red_neurona {
     double [][] weights2;
     double [][] biasH;
     double [][] biasO;
-    double alpha = 0.001;
+    double alpha = 0.01;
 
 
     public Red_neurona(int inputS, int hiddenS, int ouputS) {
@@ -15,8 +15,9 @@ public class Red_neurona {
         biasO = inicializar(hiddenS, 1);
     }
 
-    public double[][] prediccion(double[][] input_user){
+    public double[][] prediccion(double[] x){
 
+        double[][] input_user= Helper.convertir_Array_Matrix(x);
         double[][] hidden = Helper.multiplicacion(weights1, input_user);
         hidden = Helper.mat_Sum(hidden, biasH);
         hidden = Helper.sigmoide(hidden);
@@ -28,8 +29,13 @@ public class Red_neurona {
 
     }
 
-    public void train(double[][] input_user, double[][] target){
+    public void train(double[] x, double[] y){
 
+        double[][] target = Helper.convertir_Array_Matrix(y);
+        double[][] input_user =Helper.convertir_Array_Matrix(x);
+
+
+        //Optenemos el output // lo mismo que prediccion()
         double[][] hidden = Helper.multiplicacion(weights1, input_user);
         hidden = Helper.mat_Sum(hidden, biasH);
         hidden = Helper.sigmoide(hidden);
@@ -38,16 +44,41 @@ public class Red_neurona {
         output = Helper.mat_Sum(output, biasO);
         output = Helper.sigmoide(output);
 
-
+        //obtenemos la gradiente
         double[][] error = Helper.mat_rest(target, output);
+
         double[][] gradiente = Helper.derivada_sigmoide(output);
-        gradiente = Helper.multiplicacion(gradiente,error);
+        gradiente = Helper.multiplicacion(gradiente, error);
         gradiente = Helper.multi(gradiente,alpha);
 
+        //de aqui en adelante quien sabe que vergas hace esto y como se pueda hacer dinamico es un misterio
 
+        double[][] who_delta = Helper.multiplicacion(Helper.matrix_XT(hidden), gradiente);
+
+        weights2 = Helper.mat_Sum(weights2, who_delta);
+        biasO = Helper.mat_Sum(biasO, gradiente );
+
+        double[][] hidden_errors = Helper.multiplicacion(Helper.matrix_XT(who_delta), error);
+
+        double[][] h_gradiente = Helper.derivada_sigmoide(hidden);
+        h_gradiente = Helper.multiplicacion(h_gradiente, hidden_errors );
+        h_gradiente = Helper.multi(h_gradiente, alpha);
+
+        double[][] wih_delta = Helper.multiplicacion( Helper.matrix_XT(input_user), h_gradiente);
+
+
+        weights1 = Helper.mat_Sum(weights1, wih_delta );
+        biasH = Helper.mat_Sum(biasH, h_gradiente);
 
     }
-
+    public void cycleTraining(double[][]x, double[][]y, int iteration)
+    {
+        for(int i=0;i<iteration;i++)
+        {
+            int sampleN =  (int)(Math.random() * x.length );
+            train(x[sampleN], y[sampleN]);
+        }
+    }
 
 
 
