@@ -12,12 +12,13 @@ public class Red_neurona {
         weights1 = inicializar(hiddenS,inputS);
         weights2 = inicializar(ouputS,hiddenS);
         biasH = inicializar(hiddenS, 1);
-        biasO = inicializar(hiddenS, 1);
+        biasO = inicializar(ouputS, 1);
     }
 
     public double[][] prediccion(double[] x){
 
         double[][] input_user= Helper.convertir_Array_Matrix(x);
+
         double[][] hidden = Helper.multiplicacion(weights1, input_user);
         hidden = Helper.mat_Sum(hidden, biasH);
         hidden = Helper.sigmoide(hidden);
@@ -86,7 +87,8 @@ public class Red_neurona {
         double[][] result = new double[filas][columnas];
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                result[i][j] =Math.random()*2-1;
+                //result[i][j] =Math.random()*2-1;
+                result[i][j] = 1;
             }
         }
         return  result;

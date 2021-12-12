@@ -26,10 +26,10 @@ public class Helper {
             mat_sum = new double[mat_A.length][mat_A[0].length];
             for(int i=0;i<mat_A.length;i++){
                 for(int j=0;j<mat_A[0].length;j++){
-                    mat_sum[i][j] = mat_A[i][j] + mat_B[i][j];
+                    mat_A[i][j] +=mat_B[i][j];
                 }
             }
-            return mat_sum;
+            return mat_A;
         } else {
             return mat_A;
         }
