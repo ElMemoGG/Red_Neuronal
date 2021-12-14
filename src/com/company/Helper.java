@@ -19,6 +19,18 @@ public class Helper {
         }
         return respuesta;
     }
+    public static double [][] multiplicacion2(double [][] a, double [][] b) {
+        for(int i = 0; i<b.length; i++)
+        {
+            for(int j = 0; j<b[0].length; j++)
+            {
+                a[i][j]*=b[i][j];
+            }
+        }
+        return a;
+    }
+
+
     public static double[][] mat_Sum(double[][] mat_A, double[][] mat_B){
         double[][] mat_sum;
 
@@ -43,6 +55,7 @@ public class Helper {
         }
         return neuron;
     }
+
     public static double[][] mat_rest(double[][] mat_A, double[][] mat_B){
         double[][] mat_rest;
 
@@ -80,7 +93,6 @@ public class Helper {
             }
         }
         return ans;
-
     }
 
     public static double [][] matrix_XT (double [][] matrix_X){
@@ -110,7 +122,6 @@ public class Helper {
         for(int i =0;i<x.length;i++)
             result[i][0]=x[i];
         return result;
-
     }
 
 

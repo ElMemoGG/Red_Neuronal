@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -16,12 +18,17 @@ public class Main {
         double[][] Y = {
                 {0, 0}, {0, 0}, {0, 0}, {0, 0}, {1, 1}, {1, 1}, {1, 1}
         };
+
+
+
         Red_neurona nn = new Red_neurona(25, 12, 2);
 
-        nn.cycleTraining(X, Y, 100000);
+        nn.cycleTraining(X, Y, 500000);
 
-        double[][] resultado = nn.prediccion(new double[]{0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0});
-        Helper.ImprimirMatriz(resultado);
+        double[][] resultado = nn.prediccion(new double[]{0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1});
+        System.out.println(new StringBuilder().append("BIas").append(Arrays.deepToString(resultado)).toString());
+
+        //Helper.ImprimirMatriz(resultado);
 
 
 

@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Arrays;
+
 public class Red_neurona {
     double [][] weights1;
     double [][] weights2;
@@ -48,9 +50,8 @@ public class Red_neurona {
 
         //obtenemos la gradiente
         double[][] error = Helper.mat_rest(target, output);
-
         double[][] gradiente = Helper.derivada_sigmoide(output);
-        gradiente = Helper.multiplicacion(gradiente, error);
+        gradiente = Helper.multiplicacion2(gradiente, error);
         gradiente = Helper.multi(gradiente,alpha);
 
         //de aqui en adelante quien sabe que vergas hace esto y como se pueda hacer dinamico es un misterio
@@ -63,7 +64,7 @@ public class Red_neurona {
         double[][] hidden_errors = Helper.multiplicacion(Helper.matrix_XT(who_delta), error);
 
         double[][] h_gradiente = Helper.derivada_sigmoide(hidden);
-        h_gradiente = Helper.multiplicacion(h_gradiente, hidden_errors );
+        h_gradiente = Helper.multiplicacion2(h_gradiente, hidden_errors);
         h_gradiente = Helper.multi(h_gradiente, alpha);
 
         double[][] wih_delta = Helper.multiplicacion( h_gradiente, Helper.matrix_XT(input_user));
